@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Layout</title>
+    <style>
+        /* General Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            scroll-behavior: smooth;
+        }
+
+        /* Header Styles */
+        .header {
+            position: relative;
+            background-image: url('https://media.tenor.com/39omUT2OvJIAAAAe/tsukihime-ciel.png');
+            background-size: cover;
+            background-position: center;
+            padding: 60px 30px;
+            text-align: center;
+            color: #fff;
+        }
+
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 0;
+        }
+
+        .header h2 {
+            position: relative;
+            z-index: 1;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Content Section */
+        .row {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            padding: 30px 15px;
+            gap: 20px;
+        }
+
+        /* Column Styles */
+        .columnA,
+        .columnB {
+            flex: 1;
+            max-width: 45%;
+            padding: 25px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Form Styles */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        form label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        form input {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 100%;
+            max-width: 100%;
+            transition: border-color 0.3s ease;
+        }
+
+        form input:focus {
+            border-color: rgb(221, 16, 16);
+            outline: none;
+        }
+
+        form input[type="submit"] {
+            background-color: rgb(221, 16, 16);
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.2s;
+            border: none;
+        }
+
+        form input[type="submit"]:hover {
+            background-color: darkred;
+            transform: scale(1.05);
+        }
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table th,
+        table td {
+            border: 1px solid #ccc;
+            padding: 12px;
+            text-align: center;
+        }
+
+        table th {
+            background-color: #f4f4f4;
+        }
+
+        /* Responsive Styles */
+        @media screen and (max-width: 768px) {
+            .columnA,
+            .columnB {
+                max-width: 100%;
+                margin: 5px 0;
+            }
+
+            .row {
+                flex-direction: column;
+                padding: 0;
+            }
+
+            /* Responsive Table */
+            table,
+            table thead,
+            table tbody,
+            table td,
+            table tr {
+                display: block;
+                width: 100%;
+            }
+
+            table thead {
+                display: none;
+            }
+
+            table tr {
+                margin-bottom: 15px;
+                border: 1px solid #ddd;
+            }
+
+            table td {
+                display: flex;
+                justify-content: space-between;
+                text-align: left;
+                padding-left: 10px;
+                position: relative;
+            }
+
+            table td::before {
+                content: attr(data-label);
+                font-weight: bold;
+                flex: 1;
+                color: #333;
+            }
+
+            table td:last-child {
+                border-bottom: 0;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .header {
+                padding: 40px 20px;
+            }
+
+            .header h2 {
+                font-size: 1.8em;
+            }
+
+            form input,
+            form input[type="submit"] {
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            .columnA,
+            .columnB {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <h2>Ahnenerbe Cafe</h2>
+    </div>
+
+    <!-- Content -->
+    <div class="row">
+        <div class="columnA">
+            <h2>Reservations Information</h2>
+            <form action="action_page.php" method="get">
+                <label for="fname">First Name</label>
+                <input type="text" id="fname" name="fname" placeholder="Enter your first name" required>
+
+                <label for="lname">Last Name</label>
+                <input type="text" id="lname" name="lname" placeholder="Enter your last name" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+                <label for="phoneNum">Phone Number</label>
+                <input type="tel" id="phoneNum" name="PhoneNum" placeholder="Enter your phone number" required>
+
+                <label for="date">Reservation Date</label>
+                <input type="date" id="date" name="reservation_date" required>
+
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+
+        <div class="columnB">
+            <h2>Menu</h2>
+            <table>
+                <tr>
+                    <th>Category</th>
+                    <th>Item</th>
+                    <th>Description</th>
+                    <th>Price (in Rp)</th>
+                </tr>
+                <tr>
+                    <td data-label="Category">Desserts</td>
+                    <td data-label="Item">Vanilla Ice Cream</td>
+                    <td data-label="Description">Rich and creamy vanilla-flavored ice cream</td>
+                    <td data-label="Price">20k</td>
+                </tr>
+                <tr>
+                    <td data-label="Category">Desserts</td>
+                    <td data-label="Item">Coffee Pudding</td>
+                    <td data-label="Description">Smooth coffee-flavored pudding with caramel sauce</td>
+                    <td data-label="Price">30k</td>
+                </tr>
+                <tr>
+                    <td data-label="Category">Main Course</td>
+                    <td data-label="Item">Curry Udon</td>
+                    <td data-label="Description">Thick udon noodles served with savory curry sauce</td>
+                    <td data-label="Price">75k</td>
+                </tr>
+                <tr>
+                    <td data-label="Category">Main Course</td>
+                    <td data-label="Item">Curry Rice</td>
+                    <td data-label="Description">Steamed rice topped with a hearty curry sauce</td>
+                    <td data-label="Price">65k</td>
+                </tr>
+                <tr>
+                    <td data-label="Category">Main Course</td>
+                    <td data-label="Item">Chicken Katsu</td>
+                    <td data-label="Description">Deep-fried breaded chicken served with tonkatsu sauce</td>
+                    <td data-label="Price">80k</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</body>
+
+</html>
